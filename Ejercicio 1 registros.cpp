@@ -22,12 +22,37 @@ void registrar_contacto(contactoemail arr[], int &n)
 		cout<<"ingrese nacionalidad: "; cin>>arr[n].nacionalidad;
 		n++;
 		cout<<"contacto agregado exitosamente."<<endl;
+		cout<<endl;
 }
+
+void eliminar_contacto(contactoemail arr[], int &n, string &buscar)
+{
+		cout<<"ingrese el email del contacto a eliminar: "; cin>>buscar;
+		for(int i=0; i<n; i++)
+		{
+			if(buscar==arr[i].email)
+			{
+				for(int j=i+1; j<n; j++)
+				{
+					arr[j-1].nombres=arr[j].nombres;
+					arr[j-1].sexo=arr[j].sexo;
+					arr[j-1].edad=arr[j].edad;
+					arr[j-1].telefono=arr[j].telefono;
+					arr[j-1].email=arr[j].email;
+					arr[j-1].nacionalidad=arr[j].nacionalidad;
+				}
+				n--;
+			}
+		}
+		cout<<endl;
+}
+
 
 
 int main()
 {
 	contactoemail agregar[100];
+	string buscar;
 	int n=0;
 	char op;
 	do
@@ -41,6 +66,7 @@ int main()
 		switch(op)
 		{
 			case 'a': registrar_contacto(agregar, n); break;
+			case 'b': eliminar_contacto(agregar, n, buscar); break;
 			
 		}
 	}
