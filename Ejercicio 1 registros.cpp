@@ -47,7 +47,18 @@ void eliminar_contacto(contactoemail arr[], int &n, string &buscar)
 		cout<<endl;
 }
 
-
+void mostrar_lista(contactoemail arr[], int &n)
+{
+		cout<<"\t\t\t\t\tlista de contactos"<<endl;
+		cout<<"-----------------------------------------------------------------------------------------------------------"<<endl;
+		cout<<"N."<<endl;
+		for(int i=0; i<n; i++)
+		{
+			cout<<i+1<<"\t"<<arr[i].nombres<<"\t\t"<<arr[i].sexo<<"\t" \
+			<<arr[i].edad<<"\t"<<arr[i].telefono<<"\t" \
+			<<arr[i].email<<"\t"<<arr[i].nacionalidad<<endl;
+		}
+}
 
 int main()
 {
@@ -67,6 +78,7 @@ int main()
 		{
 			case 'a': registrar_contacto(agregar, n); break;
 			case 'b': eliminar_contacto(agregar, n, buscar); break;
+			case 'c': mostrar_lista(agregar, n); break;
 			
 		}
 	}
