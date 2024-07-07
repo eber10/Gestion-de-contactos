@@ -12,6 +12,21 @@ struct contactoemail
 	string email;
 	string nacionalidad;
 };
+
+string obtenerDominio(const string &email)
+{
+    size_t pos=email.find('@');
+    if (pos!=string::npos)
+	{
+        return email.substr(pos+1);
+    }
+    return "";
+}
+
+bool compararPorDominio(const contactoemail &a, const contactoemail &b)
+{
+    return obtenerDominio(a.email)<obtenerDominio(b.email);
+}
 void registrar_contacto(contactoemail arr[], int &n)
 {
 		cout<<"ingrese nombres completos: "; cin.ignore(); getline(cin, arr[n].nombres);
@@ -60,6 +75,22 @@ void mostrar_lista(contactoemail arr[], int &n)
 		}
 }
 
+
+
+void mostrar_lista_ordenado(contactoemail arr[], int &n)
+{
+	    sort(arr, arr + n, compararPorDominio);
+		cout<<"\t\t\t\t\tlista de contactos ordenado por servidor de correo"<<endl;
+		cout<<"-----------------------------------------------------------------------------------------------------------"<<endl;
+		cout<<"N."<<endl;
+		for(int i=0; i<n; i++)
+		{
+			cout<<i+1<<"\t"<<arr[i].nombres<<"\t\t"<<arr[i].sexo<<"\t" \
+			<<arr[i].edad<<"\t"<<arr[i].telefono<<"\t" \
+			<<arr[i].email<<"\t"<<arr[i].nacionalidad<<endl;
+		}	
+}
+
 int main()
 {
 	contactoemail agregar[100];
@@ -79,7 +110,8 @@ int main()
 			case 'a': registrar_contacto(agregar, n); break;
 			case 'b': eliminar_contacto(agregar, n, buscar); break;
 			case 'c': mostrar_lista(agregar, n); break;
-			
+			case 'd': mostrar_lista_ordenado(agregar, n); break;
+			default: break;
 		}
 	}
 	while(op!='e');
